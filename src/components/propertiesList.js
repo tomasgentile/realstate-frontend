@@ -13,12 +13,12 @@ const PropertiesList = () => {
     const { category, FilterUI } = useFilter();
 
     useEffect(() => {
-        if(category) {
+        if (category) {
             const selectedProp = dataProperties.filter(property => property.categories === category);
             setProperties(selectedProp);
         } else {
             setProperties(dataProperties);
-        }    
+        }
     }, [category]);
 
     return (

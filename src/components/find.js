@@ -1,6 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+import { getImage } from 'gatsby-plugin-image';
+import { convertToBgImage } from "gbimage-bridge";
 import styled from '@emotion/styled';
 import * as styles from '../css/home.module.css';
 
@@ -12,20 +14,19 @@ const Find = () => {
     const { image } = useStaticQuery(graphql`
         query {
             image: file (relativePath: {eq: "encuentra.jpg"}) {
-                sharp: childImageSharp {
-                    fluid(maxWidth: 1500) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
+                childImageSharp {
+                    gatsbyImageData 
                 }
             }
         }
     `);
+    const img = getImage(image);
+    const bgImage = convertToBgImage(img);
 
     return (
         <ImageBg
-            tag='section'
-            fluid={image.sharp.fluid}
-            fadeIn='soft'
+            Tag="section"
+            {...bgImage}
         >
             <div className={styles.imageBg}>
                 <h3 className={styles.title}>Encuentra la casa de tus sueños</h3>

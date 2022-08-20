@@ -1,14 +1,14 @@
 import * as React from "react";
-import { css } from "@emotion/react";
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { getImage } from 'gatsby-plugin-image';
 import BackgroundImage from 'gatsby-background-image';
-import { convertToBgImage } from "gbimage-bridge"
+import { convertToBgImage } from "gbimage-bridge";
+import { css } from "@emotion/react";
+import * as styles from "../css/home.module.css";
 import useHome from "../hooks/useHome";
 import Layout from "../components/layout";
 import Find from "../components/find";
 import PropertiesList from "../components/propertiesList";
 import Seo from "../components/seo";
-import * as styles from "../css/home.module.css";
 
 const IndexPage = () => {
   const homeData = useHome();
@@ -29,10 +29,13 @@ const IndexPage = () => {
             <div css={css`
               height: 500px;
             `}>
-              <GatsbyImage image={image} alt={"home img"} />
             </div>
             <div className={styles.imageBg}>
-              <h1>Venta de Casas y Departamentos exclusivos</h1>
+              <h1
+                css={css`
+                  margin-bottom: 4rem;
+                `}
+              >Venta de Casas y Departamentos exclusivos</h1>
             </div>
 
           </BackgroundImage>
@@ -52,11 +55,9 @@ const IndexPage = () => {
         </div>
       </main>
       <Find />
-      <PropertiesList/>
+      <PropertiesList />
     </Layout>
   )
 }
-
-// export const Head = () => <Seo title="Home" />
 
 export default IndexPage;
