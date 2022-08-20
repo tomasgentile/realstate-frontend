@@ -1,12 +1,27 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+const strapiConfig = {
+  apiURL: process.env.STRAPI_API_URL,
+  accessToken: process.env.STRAPI_TOKEN,
+  collectionTypes: ['property', 'agente', 'categoria', 'pagina'],
+  queryLimit: 1000
+};
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `Bienes Raices Gatsby`,
+    description: `Sitio web de bienes raices en Gatsby`,
+    author: `Bienes Raices Gatsby`,
   },
   plugins: [
+    `gatsby-plugin-emotion`,
     `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-source-strapi`,
+      options: strapiConfig,
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -15,7 +30,9 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
+    `gatsby-background-image`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -27,7 +44,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/icon-48x48.png`, // This path is relative to the root of the site.
       },
     },
   ],

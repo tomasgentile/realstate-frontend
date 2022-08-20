@@ -1,16 +1,10 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
-import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-import "./layout.css"
+import * as React from "react";
+import PropTypes from "prop-types";
+import { useStaticQuery, graphql } from "gatsby";
+import "../css/normalize.css";
+import "../css/layout.css";
+import { Global, css } from "@emotion/react";
+import Header from "./header";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -25,25 +19,50 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Global
+        styles={css`
+          html {
+            font-size: 62.5%;
+            box-sizing: border-box;
+          }
+          *, *:before, *:after {
+            box-sizing: inherit;
+          }
+          body {
+            font-size: 1.6rem;
+            line-height: 2;
+            font-family: 'Lato', sans-serif;
+          }
+          h1, h2, h3 {
+            margin: 0;
+            line-height: 1.5;
+          }
+          h1, h2 {
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+          }
+          h3 {
+            font-family: 'Roboto', sans-serif;
+          }
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+          .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 95%;
+          }
+          img {
+            max-width: 100%;
+          }
+        `}
+      />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
+      <div>
         <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
       </div>
     </>
   )
@@ -53,4 +72,4 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default Layout;
